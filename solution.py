@@ -3,8 +3,8 @@ import re
 import json
 
 # Входной текст
-text = "Привет, меня зовут Петров Павел ВасиЛьевич , я родился первого января 80 года в Москве а Вася нет"
-# text = input()
+# text = "Привет, меня зовут Петров Павел ВасиЛьевич , я родился первого января 80 года в Москве в 15:30 или 3:30 а Вася нет, не знаю никакого Васю"
+text = input('Введите текст для обработки: ')
 # Словарь, в который собираются данные
 result_dict = {}
 def name_extraction(input_text, dict):
@@ -109,6 +109,32 @@ def date_extraction(input_text, dict):
 
 date_extraction(text, result_dict)
 
+def time_extraction(input_text, dict):
+    time_pattern = re.compile(r'\b(?:2[0-3]|[01]?\d)(?::[0-5]?\d)?\b')
+
+
+
+
+
+    times_found = re.findall(time_pattern, input_text)
+
+    i = 0
+    j = 0
+    try:
+        for date in times_found:
+            i += 1
+            dict[f'time_{i}']= times_found[j]
+            j += 1
+        # print(dict)
+    except Exception as e:
+        print("Error in date extraction")
+
+time_extraction(text, result_dict)
+
 json_data = json.dumps(result_dict, ensure_ascii=False)
 
 print(f"Json: {json_data}")
+
+
+
+
